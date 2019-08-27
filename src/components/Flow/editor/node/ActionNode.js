@@ -1,10 +1,6 @@
 import AbstractNode from './basic'
 
 export default class ActionsNode extends AbstractNode {
-  // static inject (editor) {
-  //   return new this(editor)
-  // }
-
   static getType () { return 'ActionNode' }
 
   constructor (editor) {
@@ -18,7 +14,7 @@ export class WeChatNode  extends ActionsNode {
 
   constructor (editor) {
     super()
-    this.label = '微信节点'
+    this.label = 'do what'
     this.transitions = [{
       label: '端口1',
       name: 'port1',
@@ -34,7 +30,7 @@ export class SmsNode  extends ActionsNode {
 
   constructor (editor) {
     super()
-    this.label = '短信节点'
+    this.label = 'do something'
     this.MAIN_COLOR = 'lightblue'
     this.transitions = [{
       label: '端口1',
