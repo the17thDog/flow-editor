@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react'
 import FlowEditor from './editor'
 import {EDITOR_EVENT} from './editor/const'
 import Graph from './components/Graph'
+import NodeDragger from './components/NodeDragger'
 import Node from './components/Node'
 
 const editor = new FlowEditor()
+window.editor = editor
 
 const Flow = () => {
   let [nodes, setNodes] = useState(editor.nodeStack)
@@ -19,26 +21,42 @@ const Flow = () => {
     setNodes([...nodeStack])
   })
 
-  function addNode () {
-    editor.addNode({ label: '人群节点', id: 'node3' })
+  function handleNodeClick (id) {
+    const node = nodes.find(n => n.id === id)
+    console.log(node)
+  }
+
+  function handleDragEnd (e) {
+    const { clientX, clientY, target } = e
+    const nodeType = target.dataset.type
+
+    editor.addNode(nodeType, {
+      x: clientX,
+      y: clientY
+    })
   }
 
   function renderNode () {
-    return nodes.map(({ label, id }, i) => (
-      <Node key={i} id={id}>{label}</Node>
+    return nodes.map((nodeData, i) => (
+      <Node
+        key={i}
+        editor={editor}
+        {...nodeData}
+        onClick={() => handleNodeClick(nodeData.id)}
+      ></Node>
     ))
   }
   
   return (
-    <>
-      <Graph
-        editor={editor}
-      >
-        {renderNode()}
-      </Graph>
+    <div
+      className="flow-wrapper"
+      style={{display: 'flex'}}
+      onDragEnd={handleDragEnd}
+    >
+      <NodeDragger />
 
-      <div onClick={addNode}>点击我</div>
-    </>
+      <Graph editor={editor}>{renderNode()}</Graph>
+    </div>
   )
 }
 

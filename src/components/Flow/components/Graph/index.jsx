@@ -1,12 +1,11 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Nodes from '../Nodes'
+import './index.less'
 
 const Graph = (props) => {
-  const { editor } = props
-
   return (
-    <div className="node-wrapper">
-      <Nodes editor={editor}>
+    <div className="node-wrapper" id="flow-container">
+      <Nodes>
         {props.children}
       </Nodes>
     </div>
