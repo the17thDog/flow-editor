@@ -22,10 +22,10 @@ const Node = (props) => {
     })
 
     editor.makeNodeDraggable(id)
-    transitions.map(t => {
+    transitions.forEach(t => {
       if (t.next) editor.createConnection(id, t.next)
     })
-  }, [])
+  }, [editor, transitions, id])
 
   return (
     <div
