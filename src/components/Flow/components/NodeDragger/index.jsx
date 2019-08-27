@@ -6,7 +6,7 @@ const NodeDragger = (props) => {
     e.preventDefault()
   }
 
-  const nodeList = [{ label: '微信节点', type: 'WeChatNode' }, { label: '短信节点', type: 'SmsNode' }]
+  const nodeList = [{ label: 'node1', type: 'WeChatNode' }, { label: 'node2', type: 'SmsNode' }]
   return (
     <div className="node-dragger">{
       nodeList.map((node, i) => (
